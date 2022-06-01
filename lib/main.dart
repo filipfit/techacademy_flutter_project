@@ -19,23 +19,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  /* var _questionIndex = 0;
-  var _totalScore = 0;
-
-  void _buttonHandler(int score) {
-    print("Button pressed!: $_questionIndex");
-    _totalScore += score;
-    setState(() => _questionIndex++);
-    print(_totalScore);
-  }
-
-  void resetQuiz() {
-    setState(() {
-      _questionIndex = 0;
-      _totalScore = 0;
-    });
-  } */
   var _bottomBarIndex = 0;
+  static final List<Widget> _mainDisplayOptions = [
+    const Text("Hello"),
+    const Text("Notes"),
+    const TATeamWebview(),
+    const TALoginWebview(),
+    SignIn()
+  ];
 
   void _onItemTapped(int index) {
     setState(() => _bottomBarIndex = index);
@@ -43,27 +34,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const _questions = [
-      {
-        "text": "What's your favorite color?",
-        "answers": [
-          {"text": "Black", "score": 1},
-          {"text": "Red", "score": 2},
-          {"text": "Green", "score": 3},
-          {"text": "White", "score": 4}
-        ]
-      },
-      {
-        "text": "What's your favorite animal?",
-        "answers": [
-          {"text": "Dog", "score": 1},
-          {"text": "Cat", "score": 2},
-          {"text": "Giraffe", "score": 3},
-          {"text": "Anteater", "score": 4}
-        ]
-      },
-    ];
-
     return MaterialApp(
       title: "Techacademy Mobile App",
       initialRoute: '/',
@@ -75,11 +45,11 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("My App Bar"),
         ),
-        body: const TALoginWebview(),
+        body: _mainDisplayOptions.elementAt(_bottomBarIndex),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _bottomBarIndex,
           onTap: _onItemTapped,
-          selectedIconTheme: const IconThemeData(color: Colors.amber),
+          selectedIconTheme: const IconThemeData(color: Colors.blue),
           unselectedIconTheme: const IconThemeData(color: Colors.black26),
           selectedItemColor: Colors.black26,
           items: const [
@@ -105,13 +75,6 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        // _questionIndex < _questions.length
-        //     ? Quiz(
-        //         questions: _questions,
-        //         questionIndex: _questionIndex,
-        //         buttonHandler: _buttonHandler,
-        //       )
-        //     : Result(_totalScore, resetQuiz),
       ),
     );
   }
