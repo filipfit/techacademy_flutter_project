@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
+  /* var _questionIndex = 0;
   var _totalScore = 0;
 
   void _buttonHandler(int score) {
@@ -34,6 +34,11 @@ class _MyAppState extends State<MyApp> {
       _questionIndex = 0;
       _totalScore = 0;
     });
+  } */
+  var _bottomBarIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() => _bottomBarIndex = index);
   }
 
   @override
@@ -71,6 +76,35 @@ class _MyAppState extends State<MyApp> {
           title: const Text("My App Bar"),
         ),
         body: const TALoginWebview(),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _bottomBarIndex,
+          onTap: _onItemTapped,
+          selectedIconTheme: const IconThemeData(color: Colors.amber),
+          unselectedIconTheme: const IconThemeData(color: Colors.black26),
+          selectedItemColor: Colors.black26,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notes),
+              label: "Notes",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.group),
+              label: "Team",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.login),
+              label: "Login",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: "Settings",
+            ),
+          ],
+        ),
         // _questionIndex < _questions.length
         //     ? Quiz(
         //         questions: _questions,
