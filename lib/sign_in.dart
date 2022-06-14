@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:techacademy_flutter_project/util.dart';
 
 class FormData {
   String? name;
@@ -21,13 +22,6 @@ class _SignInState extends State<SignIn> {
   FormData formData = FormData();
   var inputFieldFill = Colors.white;
 
-  Future<File> _createFile() async {
-    Directory dir = await getApplicationDocumentsDirectory();
-    File file = File("${dir.path}/name.txt");
-    if (await file.exists()) return file;
-    return await file.create();
-  }
-
   void saveName(String? name) async {
     if (name == null || name == '') {
       setState(() => inputFieldFill = Colors.red[200]!);
@@ -36,15 +30,8 @@ class _SignInState extends State<SignIn> {
     if (inputFieldFill == Colors.red[200]) {
       setState(() => inputFieldFill = Colors.white);
     }
-    File file = await _createFile();
-    await file.writeAsString(name);
+    await saveTextFile("name", name);
   }
-
-  // void listFiles(Directory dir) async {
-  //   await for (var entity in dir.list(recursive: true, followLinks: false)) {
-  //     print(entity.path);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +60,7 @@ class _SignInState extends State<SignIn> {
           ),
           ElevatedButton(
             child: const Text("Debug Button"),
-            onPressed: () async {
-              var file = await _createFile();
-              var content = await file.readAsString();
-              print(content);
-            },
+            onPressed: () async => print(await readTextFile(filename: "name")),
           )
         ],
       ),

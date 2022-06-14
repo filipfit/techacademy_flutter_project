@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:techacademy_flutter_project/landing_page.dart';
 import 'package:techacademy_flutter_project/routes/routes.dart';
 import 'package:techacademy_flutter_project/sign_in.dart';
 import 'package:techacademy_flutter_project/ta_login_webview.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _bottomBarIndex = 0;
   static final List<Widget> _mainDisplayOptions = [
-    const Text("Hello"),
+    LandingPage(),
     const Text("Notes"),
     const TATeamWebview(),
     const TALoginWebview(),
